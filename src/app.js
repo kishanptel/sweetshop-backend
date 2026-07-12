@@ -12,18 +12,6 @@ const { default: rateLimit } = require("express-rate-limit")
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(helmet())
-app.use(compression())
-app.use(morgan('dev'))
-
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes in milliseconds
-    limit: 100, // Limit each IP to 100 requests per `window`
-    // message: 'Too many requests, please try again later.',
-    // statusCode: 429 // HTTP status to return on limit
-})
-
-app.use(limiter)
 
 const allowedOrigins = [
     "http://localhost:5173",
@@ -44,12 +32,23 @@ app.use(cors({
     allowedHeaders: ["Content-Type", "Authorization"]
 }))
 
+app.use(helmet())
+app.use(compression())
+app.use(morgan('dev'))
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes in milliseconds
+    limit: 100, // Limit each IP to 100 requests per `window`
+    // message: 'Too many requests, please try again later.',
+    // statusCode: 429 // HTTP status to return on limit
+})
+
 app.get("/", (req, res) => {
     res.send("Backend is running");
 });
 
-app.use("/users", UserRoute)
-app.use("/contacts", ContactRoute)
-app.use("/orders", OrderRoute)
+app.use("/users", limiter, UserRoute)
+app.use("/contacts", limiter, ContactRoute)
+app.use("/orders", limiter, OrderRoute)
 
 module.exports = app
