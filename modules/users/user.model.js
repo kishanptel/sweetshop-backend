@@ -5,13 +5,15 @@ const UserSchema = new mongoose.Schema({
     profile: { type: "String", require: true },
     name: { type: "String", require: true },
     email: {
-        type: "String", require: true, unique: true,
+        type: "String", require: true,
         lowercase: true,
         trim: true
     },
     password: { type: "String", require: true },
     isAdmin: { type: "Boolean", default: false }
 }, { versionKey: false, timestamps: true })
+
+UserSchema.index({ email: 1, isAdmin: 1 }, { unique: true })
 
 UserSchema.pre("save", async function () {
     if (this.isModified("password")) {
