@@ -51,7 +51,8 @@ const UserRegister = async (req, res) => {
         const Data = await newUser.save()
 
         // Send welcome email in background
-        sendWelcomeEmail(email, name).catch(err => console.log("Welcome email sending failed:", err.message));
+        // sendWelcomeEmail(email, name).catch(err => console.log("Welcome email sending failed:", err.message));
+        await sendWelcomeEmail(email, name)
 
         res.status(201).json({
             success: true,
