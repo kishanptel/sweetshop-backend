@@ -43,6 +43,10 @@ app.use(cors({
     credentials: true
 }))
 
+app.get("/", (req, res) => {
+    res.send("Backend is running");
+});
+
 app.use("/users", UserRoute)
 app.use("/contacts", ContactRoute)
 app.use("/orders", OrderRoute)

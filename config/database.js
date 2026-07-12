@@ -2,14 +2,12 @@ const mongoose = require("mongoose")
 const { MONGOOSE_URI, DATABASE_NAME } = require("./config")
 
 async function DataBaseConnection() {
-    let isConnected = false
     try {
         const conn = await mongoose.connect(MONGOOSE_URI, {
             dbName: DATABASE_NAME,
             useNewUrlPerser: true,
             useUnifinedTopology: true
         })
-        isConnected = true
         console.log("Database connected with", conn.connection.host)
         return true
     } catch (error) {
