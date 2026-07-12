@@ -258,7 +258,7 @@ async function sendWelcomeEmail(to, name) {
                     
                     <!-- CTA Button -->
                     <div class="cta-area" style="text-align: center; margin: 35px 0 25px;">
-                        <a href="http://localhost:5174/our-cakes" class="cta-btn" target="_blank" style="font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif; display: inline-block; background-color: #3d2314; color: #ede2d1 !important; text-decoration: none; font-size: 15px; font-weight: 800; padding: 14px 28px; border-radius: 8px; border: 1px solid #2b180d; border-bottom: 4px solid #2b180d; box-shadow: 0 4px 10px rgba(61, 35, 20, 0.2);">Explore Our Cakes</a>
+                        <a href="https://sweetshop-frontend-orcin.vercel.app/our-cakes" class="cta-btn" target="_blank" style="font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif; display: inline-block; background-color: #3d2314; color: #ede2d1 !important; text-decoration: none; font-size: 15px; font-weight: 800; padding: 14px 28px; border-radius: 8px; border: 1px solid #2b180d; border-bottom: 4px solid #2b180d; box-shadow: 0 4px 10px rgba(61, 35, 20, 0.2);">Explore Our Cakes</a>
                     </div>
                 </div>
                 
