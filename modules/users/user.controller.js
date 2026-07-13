@@ -54,6 +54,18 @@ const UserRegister = async (req, res) => {
         // sendWelcomeEmail(email, name).catch(err => console.log("Welcome email sending failed:", err.message));
         await sendWelcomeEmail(email, name)
 
+        res.cookie("user_session", JSON.stringify({
+            id: Data._id,
+            name: Data.name,
+            email: Data.email,
+            profile: Data.profile,
+            isAdmin: false
+        }), {
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            sameSite: 'none',
+            secure: true
+        });
+
         res.status(201).json({
             success: true,
             message: "User Registered successfully...",
@@ -90,6 +102,18 @@ const UserLogin = async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ message: "Invalid credentials!" })
         }
+
+        res.cookie("user_session", JSON.stringify({
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            profile: user.profile,
+            isAdmin: user.isAdmin || false
+        }), {
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            sameSite: 'none',
+            secure: true
+        });
 
         res.status(200).json({
             success: true,
@@ -211,4 +235,46 @@ const DeleteUser = async (req, res) => {
     }
 }
 
-module.exports = { UserRegister, UserLogin, UpdateAdminCredentials, CreateNewAdmin, GetAllUsers, DeleteUser }
+const CheckSession = async (req, res) => {
+    try {
+        const sessionCookie = req.cookies.user_session;
+        if (!sessionCookie) {
+            return res.status(401).json({ success: false, message: "No session found" });
+        }
+        let sessionData;
+        try {
+            sessionData = typeof sessionCookie === 'string' ? JSON.parse(sessionCookie) : sessionCookie;
+        } catch (e) {
+            sessionData = sessionCookie;
+        }
+        if (!sessionData || !sessionData.id) {
+            return res.status(401).json({ success: false, message: "Invalid session" });
+        }
+        const user = await UserModel.findById(sessionData.id);
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
+        res.status(200).json({
+            success: true,
+            Data: user
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const UserLogout = async (req, res) => {
+    res.clearCookie("user_session", {
+        sameSite: 'none',
+        secure: true
+    });
+    res.status(200).json({
+        success: true,
+        message: "Logged out successfully"
+    });
+};
+
+module.exports = { UserRegister, UserLogin, UpdateAdminCredentials, CreateNewAdmin, GetAllUsers, DeleteUser, CheckSession, UserLogout }

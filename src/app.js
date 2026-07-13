@@ -10,8 +10,11 @@ const ContactRoute = require("../modules/contacts/contact.route.js")
 const OrderRoute = require("../modules/orders/order.route.js")
 const { default: rateLimit } = require("express-rate-limit")
 
+const cookieParser = require("cookie-parser")
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 const allowedOrigins = [
     "http://localhost:5173",
