@@ -11,7 +11,7 @@ async function sendWelcomeEmail(to, name) {
         `Here is a summary of your account details:\n` +
         `- Registered Email: ${to}\n` +
         `- Store Location: Plot No. 45, XYZ, Surat - 666777\n` +
-        `- Contact Support: info@cacao&crumb.in\n\n` +
+        `- Contact Support: info@cacaoncrumb.in\n\n` +
         `Explore our Cakes Catalog to start planning your next celebration.\n\n` +
         `Baked with love,\n` +
         `The Cacao & Crumb Team`;
@@ -224,7 +224,7 @@ async function sendWelcomeEmail(to, name) {
                 <!-- Header -->
                 <div class="header" style="background-color: #3d2314;">
                     <!-- Embedded logo CID for universal email client visibility -->
-                    <img src="cid:sweet_shop_logo" alt="Cacao & Crumb Logo" style="height: 64px; width: 64px; border-radius: 50%; object-fit: cover; background-color: #ffffff; border: 2px solid #ede2d1; margin-bottom: 12px; display: inline-block; padding: 2px;" />
+                    <img src="cid:cacaoncrumb_logo" alt="Cacao & Crumb Logo" style="height: 64px; width: 64px; border-radius: 50%; object-fit: cover; background-color: #ffffff; border: 2px solid #ede2d1; margin-bottom: 12px; display: inline-block; padding: 2px;" />
                     <h1 class="logo-text" style="margin: 0 0 6px; font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 24px; font-weight: 800; color: #ffffff;">Cacao & Crumb</h1>
                     <p class="header-subtitle" style="font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif; font-size: 14px; font-weight: 600; color: rgba(237, 226, 209, 0.85); margin: 0;">Makers of Happiness Since 1991</p>
                 </div>
@@ -266,7 +266,7 @@ async function sendWelcomeEmail(to, name) {
                 <!-- Footer -->
                 <div class="footer" style="text-align: center; padding: 20px 30px 30px; background-color: #fcfaf7; border-top: 1px solid rgba(61, 35, 20, 0.06); font-size: 12px; line-height: 1.6; color: rgba(10, 10, 10, 0.55);">
                     <p class="footer-text" style="font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif; margin: 0 0 8px;">
-                        Questions? Reach out to our bakers at <a href="mailto:info@sweetshop.in" style="color: #3d2314; text-decoration: none; font-weight: 600;">info@cacao&crumb.in</a>
+                        Questions? Reach out to our bakers at <a href="mailto:info@cacaoncrumb.in" style="color: #3d2314; text-decoration: none; font-weight: 600;">info@cacaoncrumb.in</a>
                     </p>
                     <!-- Split phone address layout to optimize rendering on mobile phone layout -->
                     <p class="footer-text" style="font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif; margin: 0 0 4px;">
@@ -286,9 +286,9 @@ async function sendWelcomeEmail(to, name) {
     `;
 
     const attachments = [{
-        filename: 'sweet_shop_logo.png',
-        path: path.join(__dirname, 'sweet_shop_logo.png'),
-        cid: 'sweet_shop_logo'
+        filename: 'cacaoncrumb_logo.png',
+        path: path.join(__dirname, 'cacaoncrumb_logo.png'),
+        cid: 'cacaoncrumb_logo'
     }];
 
     return await sendEmail(to, subject, text, html, attachments);
